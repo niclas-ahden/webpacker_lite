@@ -8,13 +8,6 @@ class WebpackerLite::Env < WebpackerLite::FileLoader
       instance.data
     end
 
-    def hot_loading?
-      (ENV["HOT_RELOADING"].present? && (
-      ENV["HOT_RELOADING"].upcase == "YES" ||
-        ENV["HOT_RELOADING"].upcase == "TRUE")) ||
-        current["hot_reloading_enabled_by_default"]
-    end
-
     def file_path
       Rails.root.join("config", "webpacker_lite.yml")
     end

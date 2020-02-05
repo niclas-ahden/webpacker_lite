@@ -65,7 +65,7 @@ module WebpackerLite::Helper
   #   <link rel="stylesheet" media="screen" href="/public/webpack/development/calendar-1016838bab065ae1e122.css" />
   #
   def stylesheet_pack_tag(name, **options)
-    return "" if WebpackerLite::Env.hot_loading? && !options[:enabled_when_hot_loading].presence
+    return "" if WebpackerLite::Configuration.hot_loading? && !options[:enabled_when_hot_loading].presence
     stylesheet_link_tag(asset_source(name, :stylesheet), **options)
   end
 

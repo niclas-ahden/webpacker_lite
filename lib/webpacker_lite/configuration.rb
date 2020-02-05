@@ -19,9 +19,16 @@ class WebpackerLite::Configuration < WebpackerLite::FileLoader
       "/#{configuration.fetch(:webpack_public_output_dir, "webpack")}"
     end
 
+    def hot_loading?
+      (ENV["HOT_RELOADING"].present? && (
+      ENV["HOT_RELOADING"].upcase == "YES" ||
+        ENV["HOT_RELOADING"].upcase == "TRUE")) ||
+        configuration.fetch("hot_reloading_enabled_by_default", false)
+    end
+
     # Uses the hot_reloading_host if appropriate
     def base_url
-      if WebpackerLite::Env.hot_loading?
+      if hot_loading?
         host = configuration[:hot_reloading_host]
         if host.blank?
           raise "WebpackerLite's /config/webpacker_lite.yml needs a configuration value for the "\
